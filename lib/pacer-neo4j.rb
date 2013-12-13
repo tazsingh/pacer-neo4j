@@ -72,11 +72,11 @@ module Pacer
     end
 
     def neo_batch(path)
-      bp_neo_class = com.tinkerpop.blueprints.impls.neo4jbatch.Neo4jBatchGraph
+      bp_neo_class = com.tinkerpop.blueprints.impls.neo4j.batch.Neo4jBatchGraph
       path = File.expand_path(path)
       open = proc do
         graph = bp_neo_class.new(path)
-        Pacer.open_graphs[path] = :open_batch_graph
+        Pacer.open_graphs[path] = graph.raw_graph
         graph
       end
       shutdown = proc do |g|
